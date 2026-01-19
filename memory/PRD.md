@@ -1,7 +1,7 @@
-# NESR Safety Vision - Product Requirements Document
+# AI Safety Vision - Product Requirements Document
 
 ## Original Problem Statement
-Build a safety inspection tool for NESR (National Energy Services Reunited) that uses AI vision to detect safety violations in real-time site photos.
+Build a safety inspection tool that uses AI vision to detect safety violations in real-time site photos. Added requirement: Create a beautiful, modern landing page explaining the tool's features.
 
 ## Architecture
 - **Frontend**: React with Tailwind CSS, Shadcn/UI components
@@ -22,17 +22,24 @@ Build a safety inspection tool for NESR (National Energy Services Reunited) that
 - Confidence scores for each detection
 - User notes and flagging capability
 - PDF report generation
+- Landing page explaining features
 
 ## What's Been Implemented (January 2025)
+- ✅ Modern landing page with hero, features, how it works, detection categories
 - ✅ Multi-photo upload with drag-drop support
 - ✅ GPT-4o Vision integration for safety analysis
 - ✅ Photo gallery with risk badges and violation summaries
 - ✅ Photo detail modal with HUD overlay styling
 - ✅ User notes and flag-for-followup functionality
 - ✅ PDF report generation with executive summary
-- ✅ Dark mode enterprise design (NESR themed)
+- ✅ Dark mode enterprise design (Safety Orange + Cyan accents)
 - ✅ Real-time upload progress indicators
 - ✅ Statistics dashboard (total photos, risk counts, avg safety score)
+- ✅ Responsive design for mobile/tablet
+
+## Routes
+- `/` - Landing page (marketing/features)
+- `/inspect` - Inspection tool (upload & analyze)
 
 ## Prioritized Backlog
 ### P0 (Critical)
@@ -46,10 +53,8 @@ Build a safety inspection tool for NESR (National Energy Services Reunited) that
 - Historical inspection tracking in database
 - Dashboard with analytics/charts
 - Photo annotation tools
-- Comparison view between inspections
 
 ## Next Tasks
-1. Add email integration for sending reports (Resend/SendGrid)
+1. Add email integration for sending reports
 2. Implement historical inspection storage
-3. Add analytics dashboard with trend charts
-4. Mobile optimization improvements
+3. Add user authentication for teams

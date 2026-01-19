@@ -1,7 +1,9 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Flag, AlertTriangle, Shield, Eye, CheckCircle } from "lucide-react";
+import { Flag, AlertTriangle, Shield, Eye, CheckCircle, FileDown } from "lucide-react";
+import { generateSinglePhotoPDF } from "@/utils/pdfGenerator";
+import { toast } from "sonner";
 
 const getRiskBadgeClass = (riskLevel) => {
   switch (riskLevel) {
@@ -20,9 +22,21 @@ const PhotoCard = ({ photo, onSelect, onToggleFlag }) => {
   const { analysisResults, previewUrl, fileName, flaggedForFollowUp } = photo;
   const { riskLevel, safetyScore, violations } = analysisResults;
   
-  // Show 2 violations on mobile, 3 on larger screens
   const topViolations = violations.slice(0, 2);
   const hasMoreViolations = violations.length > 2;
+
+  const handleDownloadPDF = (e) => {
+    e.stopPropagation();
+    try {
+      const pdfFileName = generateSinglePhotoPDF(photo);
+      toast.success("Report Downloaded", {
+        description: pdfFileName
+      });
+    } catch (error) {
+      console.error("PDF generation error:", error);
+      toast.error("Failed to generate report");
+    }
+  };
 
   return (
     <Card 
@@ -30,7 +44,7 @@ const PhotoCard = ({ photo, onSelect, onToggleFlag }) => {
       className="group overflow-hidden rounded-sm border border-border bg-card hover:border-primary/50 transition-colors cursor-pointer"
       onClick={() => onSelect(photo)}
     >
-      {/* Image Container - responsive aspect ratio */}
+      {/* Image Container */}
       <div className="relative aspect-[4/3] sm:aspect-video bg-slate-900 overflow-hidden">
         <img 
           src={previewUrl} 
@@ -84,20 +98,41 @@ const PhotoCard = ({ photo, onSelect, onToggleFlag }) => {
           </div>
         </div>
 
-        {/* Hover Overlay - hidden on touch devices */}
-        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity hidden sm:flex items-center justify-center">
+        {/* Hover Overlay */}
+        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity hidden sm:flex items-center justify-center gap-2">
           <Button variant="secondary" size="sm" className="rounded-sm uppercase tracking-wider font-bold text-xs">
             <Eye className="w-4 h-4 mr-2" />
-            View Details
+            View
+          </Button>
+          <Button 
+            variant="secondary" 
+            size="sm" 
+            className="rounded-sm uppercase tracking-wider font-bold text-xs bg-primary hover:bg-primary/90 text-primary-foreground"
+            onClick={handleDownloadPDF}
+          >
+            <FileDown className="w-4 h-4 mr-1" />
+            PDF
           </Button>
         </div>
       </div>
 
       {/* Card Content */}
       <CardContent className="p-3 sm:p-4 bg-card">
-        <p className="text-xs sm:text-sm font-mono truncate mb-2 sm:mb-3 text-foreground" title={fileName}>
-          {fileName}
-        </p>
+        <div className="flex items-center justify-between mb-2 sm:mb-3">
+          <p className="text-xs sm:text-sm font-mono truncate flex-1 text-foreground" title={fileName}>
+            {fileName}
+          </p>
+          {/* Mobile PDF Download Button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-7 w-7 sm:hidden ml-2 text-primary hover:text-primary/80"
+            onClick={handleDownloadPDF}
+            data-testid={`download-pdf-${photo.photoId}`}
+          >
+            <FileDown className="w-4 h-4" />
+          </Button>
+        </div>
 
         {/* Violations Summary */}
         {violations.length > 0 ? (

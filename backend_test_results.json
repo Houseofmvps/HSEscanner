@@ -30,30 +30,24 @@
     {
       "test": "Analyze Endpoint - Safety Scene",
       "success": true,
-      "details": "Violations: 2, Risk: Medium, Score: 80%",
+      "details": "Violations: 1, Risk: Medium, Score: 80%",
       "response_data": {
-        "photoId": "6f83ad9c-6011-4a46-976b-f539bc9781a9",
+        "photoId": "71443952-b795-4b48-abdc-498509f7d1d7",
         "fileName": "test_safety_scene.jpg",
-        "uploadTime": "2026-01-19T11:50:03.114615+00:00",
+        "uploadTime": "2026-01-19T12:05:11.291068+00:00",
         "analysisResults": {
           "violations": [
             {
-              "type": "Uncovered pits/holes",
-              "location": "bottom-center",
-              "confidence": 95,
-              "category": "Equipment"
-            },
-            {
-              "type": "Improperly stacked materials",
-              "location": "center-right",
-              "confidence": 85,
+              "type": "Uncovered Pit",
+              "location": "bottom-left",
+              "confidence": 90,
               "category": "Equipment"
             }
           ],
           "riskLevel": "Medium",
           "safetyScore": 80
         },
-        "processingTime": 5.673932313919067
+        "processingTime": 2.1104776859283447
       }
     },
     {
@@ -61,15 +55,15 @@
       "success": true,
       "details": "Violations: 0, Risk: Low, Score: 100%",
       "response_data": {
-        "photoId": "bfc77966-3b64-4b43-a16b-bfc58b5d37b2",
+        "photoId": "b6bdcb2d-bce6-4fe4-905b-da30431cdc7f",
         "fileName": "test_clean_site.jpg",
-        "uploadTime": "2026-01-19T11:50:10.866117+00:00",
+        "uploadTime": "2026-01-19T12:05:15.444418+00:00",
         "analysisResults": {
           "violations": [],
           "riskLevel": "Low",
           "safetyScore": 100
         },
-        "processingTime": 2.8437795639038086
+        "processingTime": 1.3115005493164062
       }
     },
     {

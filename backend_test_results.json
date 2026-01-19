@@ -1,8 +1,8 @@
 {
-  "total_tests": 6,
-  "passed_tests": 5,
+  "total_tests": 8,
+  "passed_tests": 7,
   "failed_tests": 1,
-  "success_rate": 83.33333333333334,
+  "success_rate": 87.5,
   "test_details": [
     {
       "test": "Root Endpoint",
@@ -30,30 +30,30 @@
     {
       "test": "Analyze Endpoint - Safety Scene",
       "success": true,
-      "details": "Violations: 2, Risk: Medium, Score: 70%",
+      "details": "Violations: 2, Risk: Medium, Score: 55%",
       "response_data": {
-        "photoId": "b9c22fab-86a6-44b3-8b6e-b2dc3d31d736",
+        "photoId": "45dbde9e-dcd4-4704-87df-92f8d9ea16b3",
         "fileName": "test_safety_scene.jpg",
-        "uploadTime": "2026-01-19T12:14:48.704812+00:00",
+        "uploadTime": "2026-01-19T12:37:36.468151+00:00",
         "analysisResults": {
           "violations": [
             {
-              "type": "Uncovered Pit/Hole",
-              "location": "bottom-center",
+              "type": "Uncovered pits/holes",
+              "location": "bottom-left",
               "confidence": 95,
               "category": "Equipment"
             },
             {
-              "type": "Improperly Stacked Materials",
+              "type": "Unsecured equipment",
               "location": "center-right",
               "confidence": 90,
               "category": "Equipment"
             }
           ],
           "riskLevel": "Medium",
-          "safetyScore": 70
+          "safetyScore": 55
         },
-        "processingTime": 3.228954792022705
+        "processingTime": 4.453564167022705
       }
     },
     {
@@ -61,15 +61,97 @@
       "success": true,
       "details": "Violations: 0, Risk: Low, Score: 100%",
       "response_data": {
-        "photoId": "384661c9-b497-45f0-bd81-eda7c14a327e",
+        "photoId": "6499eea7-eaf3-452b-bc8f-3514b7e85848",
         "fileName": "test_clean_site.jpg",
-        "uploadTime": "2026-01-19T12:14:54.003747+00:00",
+        "uploadTime": "2026-01-19T12:37:42.978814+00:00",
         "analysisResults": {
           "violations": [],
           "riskLevel": "Low",
           "safetyScore": 100
         },
-        "processingTime": 2.3032138347625732
+        "processingTime": 1.8224384784698486
+      }
+    },
+    {
+      "test": "Safety Score Consistency - Multiple Violations",
+      "success": true,
+      "details": "Violations: 6, Score: 0%, Risk: High - All rules passed",
+      "response_data": {
+        "photoId": "8600900f-f946-4b34-896f-b293ee4ac9e6",
+        "fileName": "test_multiple_violations.jpg",
+        "uploadTime": "2026-01-19T12:37:46.841044+00:00",
+        "analysisResults": {
+          "violations": [
+            {
+              "type": "Uncovered pits/holes",
+              "location": "bottom-left",
+              "confidence": 95,
+              "category": "Equipment"
+            },
+            {
+              "type": "Spill hazard",
+              "location": "center-right",
+              "confidence": 90,
+              "category": "Environmental"
+            },
+            {
+              "type": "Exposed wiring",
+              "location": "top-left",
+              "confidence": 85,
+              "category": "Environmental"
+            },
+            {
+              "type": "Blocked exits/pathways",
+              "location": "center-right",
+              "confidence": 80,
+              "category": "Environmental"
+            },
+            {
+              "type": "Missing hard hat",
+              "location": "center",
+              "confidence": 95,
+              "category": "PPE"
+            },
+            {
+              "type": "Missing safety vest/high-visibility clothing",
+              "location": "center",
+              "confidence": 90,
+              "category": "PPE"
+            }
+          ],
+          "riskLevel": "High",
+          "safetyScore": 0
+        },
+        "processingTime": 6.935561418533325
+      }
+    },
+    {
+      "test": "Backend Validation Logic",
+      "success": true,
+      "details": "Violations: 2, Score: 50% <= Expected Max: 70%",
+      "response_data": {
+        "photoId": "52c682d7-a0df-4161-95cc-d602fb498d21",
+        "fileName": "test_validation_logic.jpg",
+        "uploadTime": "2026-01-19T12:37:54.828491+00:00",
+        "analysisResults": {
+          "violations": [
+            {
+              "type": "Uncovered pits/holes",
+              "location": "bottom-left",
+              "confidence": 95,
+              "category": "Equipment"
+            },
+            {
+              "type": "Unsecured equipment",
+              "location": "center-right",
+              "confidence": 90,
+              "category": "Equipment"
+            }
+          ],
+          "riskLevel": "Medium",
+          "safetyScore": 50
+        },
+        "processingTime": 3.7818009853363037
       }
     },
     {

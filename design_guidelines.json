@@ -1,101 +1,136 @@
 {
   "identity": {
-    "name": "NESR Safety Vision",
-    "archetype": "The Performance Pro",
-    "vibe": "Tactical, Industrial, High-Precision",
-    "description": "A safety inspection tool that feels like a military-grade instrument. High contrast, data-dense, and uncompromising on clarity."
+    "name": "AI Safety Vision",
+    "tone": "Tactical Precision, Reliable, High-Tech, Industrial",
+    "archetype": "The Performance Pro (Industrial Variant)",
+    "keywords": ["Computer Vision", "Safety", "Compliance", "Real-time", "Protection"]
   },
   "typography": {
-    "font_family": {
-      "headings": "Barlow Condensed, sans-serif",
-      "body": "Inter, sans-serif",
-      "mono": "JetBrains Mono, monospace"
+    "headings": {
+      "family": "Barlow Condensed, sans-serif",
+      "weights": ["700", "800"],
+      "usage": "Main headlines, section titles. Use uppercase for maximum impact.",
+      "tracking": "tracking-tight"
     },
-    "instructions": "Add <link href='https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap' rel='stylesheet'> to the public/index.html file.",
-    "usage": {
-      "h1": "text-4xl md:text-5xl font-bold tracking-tight uppercase font-heading",
-      "h2": "text-3xl font-semibold tracking-tight uppercase font-heading",
-      "h3": "text-xl font-medium tracking-wide uppercase text-muted-foreground font-heading",
-      "body": "text-base leading-relaxed text-foreground/90 font-body",
-      "label": "text-xs font-bold tracking-widest uppercase text-muted-foreground font-mono"
+    "body": {
+      "family": "Inter, sans-serif",
+      "weights": ["400", "500"],
+      "usage": "Paragraphs, descriptions.",
+      "tracking": "tracking-normal"
+    },
+    "ui": {
+      "family": "JetBrains Mono, monospace",
+      "weights": ["500"],
+      "usage": "Data points, confidence scores, button labels, technical specs.",
+      "tracking": "tracking-wide"
     }
   },
   "colors": {
+    "theme": "dark",
     "palette": {
+      "background": {
+        "default": "#020617",
+        "secondary": "#0F172A",
+        "surface": "#1E293B"
+      },
       "primary": {
-        "name": "NESR Blue",
-        "hex": "#0F172A",
-        "tailwind": "bg-slate-900"
+        "main": "#F97316",
+        "hover": "#EA580C",
+        "description": "Safety Orange - used for CTAs and critical alerts"
       },
       "accent": {
-        "name": "Safety Orange",
-        "hex": "#F97316",
-        "tailwind": "bg-orange-500"
-      },
-      "background": {
-        "light": "#F8FAFC",
-        "dark": "#020617"
+        "main": "#22D3EE",
+        "glow": "rgba(34, 211, 238, 0.5)",
+        "description": "HUD Cyan - used for AI vision overlays, scanning lines, and tech accents"
       },
       "status": {
-        "high_risk": "#EF4444",
-        "medium_risk": "#F59E0B",
-        "low_risk": "#22C55E"
+        "danger": "#EF4444",
+        "warning": "#F59E0B",
+        "success": "#22C55E"
+      },
+      "text": {
+        "primary": "#F8FAFC",
+        "secondary": "#94A3B8",
+        "muted": "#64748B"
       }
-    },
-    "semantic_tokens": {
-      "risk_high": "bg-red-100 text-red-700 border-red-200 dark:bg-red-900/30 dark:text-red-400 dark:border-red-800",
-      "risk_medium": "bg-amber-100 text-amber-700 border-amber-200 dark:bg-amber-900/30 dark:text-amber-400 dark:border-amber-800",
-      "risk_low": "bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-400 dark:border-emerald-800",
-      "hud_overlay": "border-2 border-cyan-400/50 bg-cyan-400/10 text-cyan-300"
     }
   },
   "layout": {
-    "grid_system": "Bento Grid Mode B (High Density)",
-    "spacing": "Generous padding (p-6, p-8) for containers, tight gaps (gap-4) for data grids.",
-    "container_style": "border border-border bg-card shadow-sm rounded-sm",
-    "page_structure": {
-      "dashboard": "grid grid-cols-1 md:grid-cols-12 gap-6 p-6",
-      "upload_zone": "border-2 border-dashed border-muted-foreground/25 rounded-lg p-12 text-center hover:bg-muted/50 transition-colors cursor-pointer"
+    "grid_system": "The Bento Grid (Mode A)",
+    "spacing": "Generous. Use p-12, p-24 for section gaps. p-6, p-8 for internal card padding.",
+    "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+    "z_index": {
+      "base": "0",
+      "overlay": "10",
+      "modal": "50",
+      "tooltip": "60"
     }
   },
   "components": {
-    "buttons": {
-      "primary": "rounded-sm font-bold uppercase tracking-wider shadow-none hover:translate-y-[-1px] transition-transform",
-      "secondary": "rounded-sm border-2 border-input bg-transparent hover:bg-accent hover:text-accent-foreground uppercase tracking-wider"
+    "HeroSection": {
+      "structure": "Split layout or Centered with massive visual.",
+      "visual": "Background image of construction site with animated 'scanning' overlay (cyan lines, bounding boxes).",
+      "typography": "H1: text-6xl md:text-8xl font-heading uppercase tracking-tighter. Sub: text-xl text-muted-foreground.",
+      "cta": "Primary Button (Orange) + Secondary 'Watch Demo' (Ghost/Outline)."
     },
-    "cards": {
-      "style": "rounded-sm border border-border bg-card text-card-foreground shadow-sm",
-      "hover": "hover:border-primary/50 transition-colors"
+    "FeatureGrid": {
+      "structure": "Bento Grid. Mix of large cards (2x2) and smaller detail cards (1x1).",
+      "style": "Glassmorphism cards (bg-slate-900/50 backdrop-blur-md) with 1px border (border-slate-800). Hover: border-cyan-500/50.",
+      "content": [
+        "Real-time Detection (Large)",
+        "PDF Reports (Tall)",
+        "99% Accuracy (Small)",
+        "24/7 Monitoring (Small)"
+      ]
     },
-    "badges": {
-      "style": "rounded-none px-2 py-0.5 text-xs font-bold uppercase tracking-widest"
+    "HowItWorks": {
+      "structure": "Step-by-step vertical timeline or horizontal process cards.",
+      "steps": [
+        {"title": "Upload", "icon": "UploadCloud"},
+        {"title": "AI Scan", "icon": "ScanEye"},
+        {"title": "Report", "icon": "FileText"}
+      ]
     },
-    "inputs": {
-      "style": "rounded-sm border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+    "ViolationDemo": {
+      "structure": "Interactive image container.",
+      "features": "Hovering over image reveals bounding boxes with confidence scores (e.g., 'No Helmet: 98%').",
+      "style": "Use 'hud-brackets' class for corners."
     }
   },
   "visual_enhancers": {
-    "textures": "Use a subtle 'grid-pattern' SVG background for the dashboard area to give it a technical feel.",
-    "animations": {
-      "scan_line": "A vertical line moving across the image during analysis.",
-      "pulse": "Subtle pulse on high-risk badges."
-    },
-    "hud_elements": "Use 'corner brackets' (SVG) on images to simulate a viewfinder."
+    "textures": "Subtle grid pattern overlay (opacity 0.05) on background.",
+    "effects": [
+      "Scan Line: Animated vertical line moving across images.",
+      "Glow: Drop-shadow-cyan on active elements.",
+      "Glass: Backdrop blur for sticky nav and floating cards."
+    ],
+    "motion": {
+      "entrance": "Staggered fade-up for grid items.",
+      "hover": "Scale 1.02 + Border Color Change.",
+      "scroll": "Parallax effect on background images."
+    }
   },
-  "image_urls": {
-    "hero_worker": "https://images.unsplash.com/photo-1667344970411-deb8ff87603a",
-    "sample_hazard_debris": "https://images.unsplash.com/photo-1536094627107-abf98dedaa8f",
-    "sample_hazard_dust": "https://images.unsplash.com/photo-1763478438639-7742250d2159",
-    "sample_worker_red": "https://images.unsplash.com/photo-1574313462720-50e62ba298d6"
+  "media": {
+    "image_urls": {
+      "hero_bg": "https://images.unsplash.com/photo-1593812725955-6d89f01ded2d?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "feature_fall_risk": "https://images.unsplash.com/photo-1722230428078-591f520674b0?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "feature_blocked_path": "https://images.unsplash.com/photo-1683765084506-3ad53915aa01?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "feature_reporting": "https://images.unsplash.com/photo-1768796372063-4da660e034b8?crop=entropy&cs=srgb&fm=jpg&q=85"
+    },
+    "icons": "Lucide React (Shield, Eye, FileText, AlertTriangle, CheckCircle, Upload)"
+  },
+  "accessibility": {
+    "contrast": "Ensure text is white/off-white on dark backgrounds. Use bold weights for colored text.",
+    "motion": "Respect prefers-reduced-motion.",
+    "aria": "Use aria-label for icon-only buttons. Alt text for all images."
   },
   "instructions_to_main_agent": [
-    "1. INSTALL FONTS: Add the Google Fonts link for Barlow Condensed and JetBrains Mono to index.html immediately.",
-    "2. CUSTOMIZE TAILWIND: Update tailwind.config.js to include the 'font-heading' (Barlow Condensed) and 'font-mono' (JetBrains Mono) families.",
-    "3. BUILD LAYOUT: Use the 'Bento Grid' strategy for the Analysis Results page. Do not just stack cards vertically.",
-    "4. HUD INTERFACE: When displaying the 'Photo Detail View', overlay a technical HUD (Heads Up Display) on the image. Use absolute positioning for bounding boxes.",
-    "5. PDF REPORT: Ensure the PDF report generation uses a clean, table-based layout that mirrors the 'Performance Pro' aesthetic (black headers, white text).",
-    "6. DARK MODE: Ensure all text has sufficient contrast. Avoid pure black backgrounds; use slate-950 or similar.",
-    "7. DATA-TESTID: Add data-testid to the Upload Dropzone, Analyze Button, and Export PDF button."
+    "Use the existing 'tailwind.config.js' animations (scan-line, pulse-risk).",
+    "Implement the 'HeroSection' with the 'scan-line-effect' class on the image wrapper.",
+    "Use 'Barlow Condensed' for all headings to give that industrial/warning sign feel.",
+    "Ensure the 'Upload' area looks like a technical drop zone (dashed border, mono text).",
+    "For the 'ViolationDemo', create a component that overlays absolute positioned divs (bounding boxes) on the image.",
+    "Do not use generic gradients. Use the 'grid-pattern' class defined in index.css for backgrounds."
   ],
   "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
     "Dark colors look good when used independently without gradients. DO NOT use dark colors as gradients",
@@ -115,6 +150,6 @@
     "Examine existing components to understand the project's component patterns before creating new ones",
     "Components MUST use named exports (export const ComponentName = ...)",
     "Pages MUST use default exports (export default function PageName() {...})",
-    "Use sonner for toasts. Sonner component are located in /app/src/components/ui/sonner.tsx"
+    "Use sonner for toasts"
   ]
 }

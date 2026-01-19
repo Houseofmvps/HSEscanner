@@ -10,7 +10,7 @@ export const Header = () => {
           </div>
           <div>
             <h1 className="text-xl font-heading font-bold uppercase tracking-tight">
-              NESR Safety Vision
+              AI Safety Vision
             </h1>
             <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
               AI-Powered Inspection Tool

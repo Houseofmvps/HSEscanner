@@ -36,7 +36,7 @@ export const ReportGenerator = ({ photos, stats }) => {
       doc.setTextColor(255, 255, 255);
       doc.setFontSize(24);
       doc.setFont("helvetica", "bold");
-      doc.text("NESR SAFETY INSPECTION REPORT", margin, 25);
+      doc.text("AI SAFETY VISION - INSPECTION REPORT", margin, 25);
       
       doc.setFontSize(10);
       doc.setFont("helvetica", "normal");
@@ -265,11 +265,11 @@ export const ReportGenerator = ({ photos, stats }) => {
       
       doc.setFontSize(8);
       doc.setTextColor(...mutedColor);
-      doc.text("NESR Safety Vision - AI-Powered Inspection Tool", margin, footerY);
+      doc.text("AI Safety Vision - AI-Powered Inspection Tool", margin, footerY);
       doc.text("Confidential", pageWidth - margin - 25, footerY);
 
       // Save the PDF
-      const fileName = `NESR_Safety_Report_${new Date().toISOString().split('T')[0]}.pdf`;
+      const fileName = `AI_Safety_Vision_Report_${new Date().toISOString().split('T')[0]}.pdf`;
       doc.save(fileName);
       
       toast.success("Report generated successfully", {

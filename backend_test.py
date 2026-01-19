@@ -75,7 +75,7 @@ class NESRSafetyAPITester:
             
             # Person with proper PPE
             draw.ellipse([200, 180, 220, 200], fill='yellow')  # Hard hat
-            draw.ellipse([202, 182, 218, 198], fill='peach')  # Face
+            draw.ellipse([202, 182, 218, 198], fill='#FFDBAC')  # Face
             draw.rectangle([205, 200, 215, 240], fill='orange')  # Safety vest
             
         # Convert to base64

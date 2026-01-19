@@ -6,7 +6,7 @@ import { AnalysisGallery } from "@/components/AnalysisGallery";
 import { PhotoDetailModal } from "@/components/PhotoDetailModal";
 import { ReportGenerator } from "@/components/ReportGenerator";
 import { Button } from "@/components/ui/button";
-import { Shield, AlertTriangle, CheckCircle2, Clock, ArrowLeft } from "lucide-react";
+import { Shield, AlertTriangle, CheckCircle2, Clock, ArrowLeft, BarChart3 } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -134,22 +134,22 @@ export const InspectionTool = () => {
     <div className="min-h-screen bg-background grid-pattern">
       {/* Header */}
       <header className="border-b border-border bg-card/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 max-w-7xl">
+        <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4 max-w-7xl">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
               <Link to="/">
-                <Button variant="ghost" size="icon" className="mr-2">
-                  <ArrowLeft className="w-5 h-5" />
+                <Button variant="ghost" size="icon" className="h-8 w-8 sm:h-10 sm:w-10">
+                  <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
                 </Button>
               </Link>
-              <div className="p-2 bg-primary rounded-sm">
-                <Shield className="w-6 h-6 text-primary-foreground" />
+              <div className="p-1.5 sm:p-2 bg-primary rounded-sm">
+                <Shield className="w-4 h-4 sm:w-6 sm:h-6 text-primary-foreground" />
               </div>
               <div>
-                <h1 className="text-xl font-heading font-bold uppercase tracking-tight">
+                <h1 className="text-base sm:text-xl font-heading font-bold uppercase tracking-tight">
                   AI Safety Vision
                 </h1>
-                <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
+                <p className="text-[10px] sm:text-xs font-mono text-muted-foreground uppercase tracking-widest hidden sm:block">
                   Inspection Tool
                 </p>
               </div>
@@ -158,54 +158,54 @@ export const InspectionTool = () => {
         </div>
       </header>
       
-      <main className="container mx-auto px-4 py-8 max-w-7xl">
-        {/* Stats Dashboard */}
+      <main className="container mx-auto px-3 sm:px-4 py-4 sm:py-8 max-w-7xl">
+        {/* Stats Dashboard - Responsive grid */}
         {photos.length > 0 && (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 stagger-in">
-            <div className="bg-card border border-border rounded-sm p-4">
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-primary/10 rounded-sm">
-                  <Shield className="w-5 h-5 text-primary" />
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 mb-4 sm:mb-8">
+            <div className="bg-card border border-border rounded-sm p-3 sm:p-4">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="p-1.5 sm:p-2 bg-primary/10 rounded-sm">
+                  <BarChart3 className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
                 </div>
                 <div>
-                  <p className="text-xs font-mono uppercase tracking-widest text-muted-foreground">Photos</p>
-                  <p className="text-2xl font-heading font-bold">{stats.total}</p>
+                  <p className="text-[10px] sm:text-xs font-mono uppercase tracking-widest text-muted-foreground">Photos</p>
+                  <p className="text-lg sm:text-2xl font-heading font-bold">{stats.total}</p>
                 </div>
               </div>
             </div>
             
-            <div className="bg-card border border-border rounded-sm p-4">
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-red-500/10 rounded-sm">
-                  <AlertTriangle className="w-5 h-5 text-red-500" />
+            <div className="bg-card border border-border rounded-sm p-3 sm:p-4">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="p-1.5 sm:p-2 bg-red-500/10 rounded-sm">
+                  <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5 text-red-500" />
                 </div>
                 <div>
-                  <p className="text-xs font-mono uppercase tracking-widest text-muted-foreground">High Risk</p>
-                  <p className="text-2xl font-heading font-bold text-red-500">{stats.highRisk}</p>
+                  <p className="text-[10px] sm:text-xs font-mono uppercase tracking-widest text-muted-foreground">High Risk</p>
+                  <p className="text-lg sm:text-2xl font-heading font-bold text-red-500">{stats.highRisk}</p>
                 </div>
               </div>
             </div>
             
-            <div className="bg-card border border-border rounded-sm p-4">
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-amber-500/10 rounded-sm">
-                  <Clock className="w-5 h-5 text-amber-500" />
+            <div className="bg-card border border-border rounded-sm p-3 sm:p-4">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="p-1.5 sm:p-2 bg-amber-500/10 rounded-sm">
+                  <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500" />
                 </div>
                 <div>
-                  <p className="text-xs font-mono uppercase tracking-widest text-muted-foreground">Violations</p>
-                  <p className="text-2xl font-heading font-bold text-amber-500">{stats.totalViolations}</p>
+                  <p className="text-[10px] sm:text-xs font-mono uppercase tracking-widest text-muted-foreground">Violations</p>
+                  <p className="text-lg sm:text-2xl font-heading font-bold text-amber-500">{stats.totalViolations}</p>
                 </div>
               </div>
             </div>
             
-            <div className="bg-card border border-border rounded-sm p-4">
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-emerald-500/10 rounded-sm">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+            <div className="bg-card border border-border rounded-sm p-3 sm:p-4">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="p-1.5 sm:p-2 bg-emerald-500/10 rounded-sm">
+                  <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500" />
                 </div>
                 <div>
-                  <p className="text-xs font-mono uppercase tracking-widest text-muted-foreground">Avg Score</p>
-                  <p className="text-2xl font-heading font-bold text-emerald-500">{stats.avgSafetyScore}%</p>
+                  <p className="text-[10px] sm:text-xs font-mono uppercase tracking-widest text-muted-foreground">Avg Score</p>
+                  <p className="text-lg sm:text-2xl font-heading font-bold text-emerald-500">{stats.avgSafetyScore}%</p>
                 </div>
               </div>
             </div>
@@ -221,9 +221,9 @@ export const InspectionTool = () => {
 
         {/* Analysis Gallery */}
         {photos.length > 0 && (
-          <div className="mt-8">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-heading font-bold uppercase tracking-tight">
+          <div className="mt-4 sm:mt-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-0 mb-4 sm:mb-6">
+              <h2 className="text-xl sm:text-2xl font-heading font-bold uppercase tracking-tight">
                 Analysis Results
               </h2>
               <ReportGenerator photos={photos} stats={stats} />

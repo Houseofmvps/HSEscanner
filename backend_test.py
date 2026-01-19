@@ -65,6 +65,52 @@ class NESRSafetyAPITester:
             for i in range(10):
                 x = i * 40
                 draw.line([x, 0, x, 300], fill='lightgray', width=1)
+        
+        elif image_type == "multiple_violations":
+            # Draw a scene with multiple obvious safety violations
+            # Ground with multiple hazards
+            draw.rectangle([0, 250, 400, 300], fill='brown')
+            
+            # Building/structure
+            draw.rectangle([50, 150, 200, 250], fill='gray')
+            
+            # Multiple people with PPE violations
+            # Person 1 - No hard hat, no safety vest
+            draw.ellipse([100, 180, 120, 200], fill='#FFDBAC')  # Head (no hard hat)
+            draw.rectangle([105, 200, 115, 240], fill='blue')  # Body (no safety vest)
+            
+            # Person 2 - No hard hat, no gloves
+            draw.ellipse([150, 180, 170, 200], fill='#FFDBAC')  # Head (no hard hat)
+            draw.rectangle([155, 200, 165, 240], fill='red')  # Body
+            
+            # Person 3 - No safety glasses, improper footwear
+            draw.ellipse([200, 180, 220, 200], fill='#FFDBAC')  # Head
+            draw.rectangle([205, 200, 215, 240], fill='green')  # Body
+            
+            # Multiple environmental hazards
+            # Spill 1
+            draw.ellipse([80, 260, 120, 280], fill='black')
+            # Spill 2
+            draw.ellipse([250, 260, 290, 280], fill='darkred')
+            
+            # Exposed wiring (critical violation)
+            draw.line([30, 100, 30, 150], fill='red', width=3)
+            draw.line([35, 100, 35, 150], fill='yellow', width=3)
+            
+            # Unsecured equipment
+            draw.rectangle([300, 200, 350, 250], fill='orange')
+            draw.polygon([(300, 200), (320, 180), (350, 200)], fill='orange')  # Tilted
+            
+            # Blocked exit (draw X over door)
+            draw.rectangle([370, 160, 390, 220], fill='brown')  # Door
+            draw.line([370, 160, 390, 220], fill='red', width=4)  # X
+            draw.line([370, 220, 390, 160], fill='red', width=4)  # X
+            
+            # Clutter and debris
+            for i in range(5):
+                x = 20 + i * 30
+                y = 270 + (i % 2) * 10
+                draw.rectangle([x, y, x+15, y+10], fill='gray')
             
         elif image_type == "clean_site":
             # Draw a clean, compliant site

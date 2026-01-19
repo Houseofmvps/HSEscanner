@@ -199,6 +199,144 @@ class NESRSafetyAPITester:
             self.log_test("Analyze Endpoint - Safety Scene", False, f"Request failed: {str(e)}")
         return False
 
+    def test_safety_score_consistency_multiple_violations(self):
+        """Test that safety score is appropriately low when multiple violations are detected"""
+        try:
+            # Create test image with multiple safety violations
+            image_base64 = self.create_test_image("multiple_violations")
+            
+            payload = {
+                "image_base64": image_base64,
+                "file_name": "test_multiple_violations.jpg"
+            }
+            
+            print("🔍 Testing safety score consistency with multiple violations...")
+            start_time = time.time()
+            
+            response = requests.post(
+                f"{self.api_url}/analyze", 
+                json=payload, 
+                timeout=30,
+                headers={'Content-Type': 'application/json'}
+            )
+            
+            processing_time = time.time() - start_time
+            print(f"⏱️  Analysis completed in {processing_time:.2f} seconds")
+            
+            if response.status_code == 200:
+                data = response.json()
+                analysis = data['analysisResults']
+                
+                violations_count = len(analysis['violations'])
+                safety_score = analysis['safetyScore']
+                risk_level = analysis['riskLevel']
+                
+                print(f"📊 Found {violations_count} violations, Score: {safety_score}%, Risk: {risk_level}")
+                
+                # Test scoring consistency rules
+                success = True
+                issues = []
+                
+                # Rule 1: If 3+ violations detected, safety score should be BELOW 60
+                if violations_count >= 3 and safety_score >= 60:
+                    success = False
+                    issues.append(f"3+ violations ({violations_count}) but score {safety_score}% >= 60%")
+                
+                # Rule 2: If 5+ violations detected, safety score should be BELOW 40
+                if violations_count >= 5 and safety_score >= 40:
+                    success = False
+                    issues.append(f"5+ violations ({violations_count}) but score {safety_score}% >= 40%")
+                
+                # Rule 3: Risk level should be 'High' when safety score is below 50
+                if safety_score < 50 and risk_level != 'High':
+                    success = False
+                    issues.append(f"Score {safety_score}% < 50 but risk level is '{risk_level}' not 'High'")
+                
+                # Rule 4: Check for critical violations and appropriate scoring
+                critical_violations = [v for v in analysis['violations'] 
+                                     if v.get('category') in ['PPE', 'Environmental'] or 
+                                        any(keyword in v.get('type', '').lower() 
+                                            for keyword in ['missing hard hat', 'exposed wiring', 'fire hazard'])]
+                
+                if len(critical_violations) >= 1 and risk_level != 'High':
+                    success = False
+                    issues.append(f"Critical violations detected but risk level is '{risk_level}' not 'High'")
+                
+                if success:
+                    self.log_test("Safety Score Consistency - Multiple Violations", True, 
+                                f"Violations: {violations_count}, Score: {safety_score}%, Risk: {risk_level} - All rules passed", data)
+                else:
+                    self.log_test("Safety Score Consistency - Multiple Violations", False, 
+                                f"Scoring inconsistencies: {'; '.join(issues)}", data)
+                
+                return success
+                
+            else:
+                self.log_test("Safety Score Consistency - Multiple Violations", False, 
+                            f"Status code: {response.status_code}, Response: {response.text}")
+                
+        except Exception as e:
+            self.log_test("Safety Score Consistency - Multiple Violations", False, f"Request failed: {str(e)}")
+        return False
+
+    def test_backend_validation_logic(self):
+        """Test the backend validation logic by simulating different violation scenarios"""
+        try:
+            # Test with a simple image to see if backend validation kicks in
+            image_base64 = self.create_test_image("safety_scene")
+            
+            payload = {
+                "image_base64": image_base64,
+                "file_name": "test_validation_logic.jpg"
+            }
+            
+            print("🔍 Testing backend validation logic...")
+            
+            response = requests.post(
+                f"{self.api_url}/analyze", 
+                json=payload, 
+                timeout=30,
+                headers={'Content-Type': 'application/json'}
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                analysis = data['analysisResults']
+                
+                violations_count = len(analysis['violations'])
+                safety_score = analysis['safetyScore']
+                risk_level = analysis['riskLevel']
+                
+                # Check if backend validation is working according to the rules in server.py
+                expected_max_score = 100
+                if violations_count >= 5:
+                    expected_max_score = 35
+                elif violations_count >= 3:
+                    expected_max_score = 55
+                elif violations_count >= 2:
+                    expected_max_score = 70
+                elif violations_count >= 1:
+                    expected_max_score = 85
+                
+                validation_working = safety_score <= expected_max_score
+                
+                if validation_working:
+                    self.log_test("Backend Validation Logic", True, 
+                                f"Violations: {violations_count}, Score: {safety_score}% <= Expected Max: {expected_max_score}%", data)
+                else:
+                    self.log_test("Backend Validation Logic", False, 
+                                f"Violations: {violations_count}, Score: {safety_score}% > Expected Max: {expected_max_score}%", data)
+                
+                return validation_working
+                
+            else:
+                self.log_test("Backend Validation Logic", False, 
+                            f"Status code: {response.status_code}")
+                
+        except Exception as e:
+            self.log_test("Backend Validation Logic", False, f"Request failed: {str(e)}")
+        return False
+
     def test_analyze_endpoint_clean_site(self):
         """Test analyze endpoint with clean site image"""
         try:

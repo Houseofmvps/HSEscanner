@@ -83,7 +83,7 @@ export const PhotoDetailModal = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl max-h-[90vh] p-0 rounded-sm overflow-hidden" data-testid="photo-detail-modal">
+      <DialogContent className="max-w-4xl max-h-[90vh] p-0 rounded-sm overflow-hidden" data-testid="photo-detail-modal" aria-describedby="photo-analysis-description">
         <div className="grid md:grid-cols-2 h-full">
           {/* Image Section */}
           <div className="relative bg-black">
@@ -131,6 +131,9 @@ export const PhotoDetailModal = ({
               <DialogTitle className="font-heading text-lg uppercase tracking-tight">
                 Analysis Details
               </DialogTitle>
+              <p id="photo-analysis-description" className="sr-only">
+                Safety analysis details for {fileName}
+              </p>
               <div className="flex items-center gap-2 text-xs text-muted-foreground font-mono">
                 <Clock className="w-3 h-3" />
                 <span>Processed in {processingTime?.toFixed(2)}s</span>

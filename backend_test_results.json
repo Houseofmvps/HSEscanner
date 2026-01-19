@@ -1,8 +1,8 @@
 {
   "total_tests": 6,
-  "passed_tests": 3,
-  "failed_tests": 3,
-  "success_rate": 50.0,
+  "passed_tests": 5,
+  "failed_tests": 1,
+  "success_rate": 83.33333333333334,
   "test_details": [
     {
       "test": "Root Endpoint",
@@ -29,15 +29,48 @@
     },
     {
       "test": "Analyze Endpoint - Safety Scene",
-      "success": false,
-      "details": "Request failed: unknown color specifier: 'peach'",
-      "response_data": null
+      "success": true,
+      "details": "Violations: 2, Risk: Medium, Score: 80%",
+      "response_data": {
+        "photoId": "6f83ad9c-6011-4a46-976b-f539bc9781a9",
+        "fileName": "test_safety_scene.jpg",
+        "uploadTime": "2026-01-19T11:50:03.114615+00:00",
+        "analysisResults": {
+          "violations": [
+            {
+              "type": "Uncovered pits/holes",
+              "location": "bottom-center",
+              "confidence": 95,
+              "category": "Equipment"
+            },
+            {
+              "type": "Improperly stacked materials",
+              "location": "center-right",
+              "confidence": 85,
+              "category": "Equipment"
+            }
+          ],
+          "riskLevel": "Medium",
+          "safetyScore": 80
+        },
+        "processingTime": 5.673932313919067
+      }
     },
     {
       "test": "Analyze Endpoint - Clean Site",
-      "success": false,
-      "details": "Request failed: unknown color specifier: 'peach'",
-      "response_data": null
+      "success": true,
+      "details": "Violations: 0, Risk: Low, Score: 100%",
+      "response_data": {
+        "photoId": "bfc77966-3b64-4b43-a16b-bfc58b5d37b2",
+        "fileName": "test_clean_site.jpg",
+        "uploadTime": "2026-01-19T11:50:10.866117+00:00",
+        "analysisResults": {
+          "violations": [],
+          "riskLevel": "Low",
+          "safetyScore": 100
+        },
+        "processingTime": 2.8437795639038086
+      }
     },
     {
       "test": "Analyze Endpoint - Invalid Data",

@@ -491,6 +491,13 @@ class NESRSafetyAPITester:
         time.sleep(2)  # Brief pause between AI calls
         self.test_analyze_endpoint_clean_site()
         
+        # Safety score consistency tests (NEW)
+        print("\n🎯 Testing Safety Score Consistency (Bug Fix Validation)...")
+        time.sleep(2)  # Brief pause between AI calls
+        self.test_safety_score_consistency_multiple_violations()
+        time.sleep(1)
+        self.test_backend_validation_logic()
+        
         # Error handling tests
         print("\n🛡️  Testing Error Handling...")
         self.test_analyze_endpoint_invalid_data()

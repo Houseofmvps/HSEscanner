@@ -23,12 +23,13 @@
 
 ---
 
-### Step 2: Get Your EMERGENT_LLM_KEY
+### Step 2: Get Your OpenAI API Key
 
-1. Go to Emergent platform
-2. Click **Profile icon** (top right)
-3. Click **"Universal Key"**
-4. Copy your key
+1. Go to [platform.openai.com](https://platform.openai.com)
+2. Sign up / Log in
+3. Click **"API Keys"** in the left menu
+4. Click **"Create new secret key"**
+5. Copy your key (starts with `sk-...`)
 
 ---
 
@@ -67,7 +68,7 @@
    |-----|-------|
    | `MONGO_URL` | `mongodb+srv://safetyuser:PASSWORD@cluster0.xxxxx.mongodb.net/safety_vision?retryWrites=true&w=majority` |
    | `DB_NAME` | `safety_vision` |
-   | `EMERGENT_LLM_KEY` | `your-emergent-key-here` |
+   | `OPENAI_API_KEY` | `sk-xxxxx` (your OpenAI API key) |
    | `CORS_ORIGINS` | `*` |
    | `PYTHON_VERSION` | `3.11.0` |
    | `NODE_VERSION` | `18` |
@@ -102,7 +103,7 @@
 
 1. **Free Tier**: App sleeps after 15 min of inactivity. First request takes ~30 sec to wake up.
 
-2. **EMERGENT_LLM_KEY Balance**: Ensure you have credits (Profile → Universal Key → Add Balance)
+2. **OpenAI API Costs**: GPT-4o Vision API has usage costs. Check your OpenAI billing.
 
 3. **Build Time**: First deployment takes 5-10 min (building React + installing Python deps)
 
@@ -116,7 +117,7 @@
 
 **API not working?**
 - Verify MONGO_URL is correct
-- Check EMERGENT_LLM_KEY has balance
+- Check OPENAI_API_KEY is valid and has credits
 
 **Frontend not loading?**
 - Wait for full deployment to complete

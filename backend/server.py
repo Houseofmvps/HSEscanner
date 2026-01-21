@@ -326,6 +326,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Serve React Frontend Static Files (for unified deployment)
+STATIC_DIR = ROOT_DIR / "static"
+if STATIC_DIR.exists():
+    app.mount("/static", StaticFiles(directory=str(STATIC_DIR / "static")), name="static")
+    
+    @app.get("/{full_path:path}")
+    async def serve_react(full_path: str):
+        """Serve React app for all non-API routes"""
+        # Check if it's a file request
+        file_path = STATIC_DIR / full_path
+        if file_path.exists() and file_path.is_file():
+            return FileResponse(file_path)
+        # Return index.html for all other routes (React Router)
+        return FileResponse(STATIC_DIR / "index.html")
+
 @app.on_event("shutdown")
 async def shutdown_db_client():
     client.close()

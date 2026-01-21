@@ -1,13 +1,12 @@
-# Render Blueprint - AI Safety Vision
-# Deploy both frontend and backend with one click
+# Render Blueprint - AI Safety Vision (Unified Deployment)
+# Single Web Service serving both frontend and backend
 
 services:
-  # Backend API Service
   - type: web
-    name: ai-safety-vision-api
+    name: ai-safety-vision
     runtime: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn server:app --host 0.0.0.0 --port $PORT
+    buildCommand: chmod +x build.sh && ./build.sh
+    startCommand: cd backend && uvicorn server:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: MONGO_URL
         sync: false
@@ -18,14 +17,8 @@ services:
       - key: CORS_ORIGINS
         value: "*"
       - key: PYTHON_VERSION
-        value: 3.11.0
-
-  # Frontend Static Site
-  - type: web
-    name: ai-safety-vision-frontend
-    runtime: static
-    buildCommand: yarn install && yarn build
-    staticPublishPath: ./build
-    envVars:
+        value: "3.11"
+      - key: NODE_VERSION
+        value: "18"
       - key: REACT_APP_BACKEND_URL
-        sync: false
+        value: ""

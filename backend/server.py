@@ -144,37 +144,49 @@ Analyze the image thoroughly and be STRICT with scoring."""
 async def analyze_image_with_vision(image_base64: str) -> dict:
     """Analyze image using GPT-4o Vision"""
     import time
+    import json
     start_time = time.time()
     
-    api_key = os.environ.get('EMERGENT_LLM_KEY')
+    api_key = os.environ.get('OPENAI_API_KEY')
     if not api_key:
-        raise HTTPException(status_code=500, detail="EMERGENT_LLM_KEY not configured")
+        raise HTTPException(status_code=500, detail="OPENAI_API_KEY not configured")
     
     try:
-        chat = LlmChat(
-            api_key=api_key,
-            session_id=f"safety-analysis-{uuid.uuid4()}",
-            system_message="You are an expert industrial safety inspector. Always respond with valid JSON."
-        ).with_model("openai", "gpt-4o")
+        client = OpenAI(api_key=api_key)
         
-        # Create image content
-        image_content = ImageContent(image_base64=image_base64)
-        
-        # Create message with image
-        user_message = UserMessage(
-            text=SAFETY_ANALYSIS_PROMPT,
-            file_contents=[image_content]
+        # Call GPT-4o Vision API
+        response = client.chat.completions.create(
+            model="gpt-4o",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are an expert industrial safety inspector. Always respond with valid JSON."
+                },
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": SAFETY_ANALYSIS_PROMPT
+                        },
+                        {
+                            "type": "image_url",
+                            "image_url": {
+                                "url": f"data:image/jpeg;base64,{image_base64}"
+                            }
+                        }
+                    ]
+                }
+            ],
+            max_tokens=1500
         )
-        
-        # Send message and get response
-        response = await chat.send_message(user_message)
         
         processing_time = time.time() - start_time
         
-        # Parse JSON response
-        import json
+        # Get response text
+        response_text = response.choices[0].message.content.strip()
+        
         # Clean response - remove markdown code blocks if present
-        response_text = response.strip()
         if response_text.startswith("```json"):
             response_text = response_text[7:]
         if response_text.startswith("```"):

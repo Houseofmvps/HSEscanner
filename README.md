@@ -117,7 +117,7 @@
 
 **API not working?**
 - Verify MONGO_URL is correct
-- Check EMERGENT_LLM_KEY has balance
+- Check OPENAI_API_KEY is valid and has credits
 
 **Frontend not loading?**
 - Wait for full deployment to complete

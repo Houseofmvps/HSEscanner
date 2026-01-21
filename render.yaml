@@ -11,7 +11,7 @@ services:
       - key: MONGO_URL
         sync: false
       - key: DB_NAME
-        value: safety_vision
+        value: Cluster1
       - key: EMERGENT_LLM_KEY
         sync: false
       - key: CORS_ORIGINS
